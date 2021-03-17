@@ -6,6 +6,7 @@
 package client_rpc.rmi;
 
 import Frame.VentanaAddCont;
+import Frame.VentanaBorrar;
 import Frame.VentanaBuscar;
 import Stub.Stub;
 import java.rmi.Naming;
@@ -22,10 +23,14 @@ import org.apache.xmlrpc.XmlRpcClient;
 public class VistaCliente extends javax.swing.JFrame {  
     private VentanaAddCont ventanaAdd;
     private VentanaBuscar ventanaBuscar;
+    private VentanaBorrar ventanaBorrar;
     private Stub cliente2;
     public VistaCliente() {
         initComponents();
        
+        btnAddContacto.setEnabled(false);
+        btnBorrar.setEnabled(false);
+        btnBuscarContacto.setEnabled(false);
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -36,6 +41,7 @@ public class VistaCliente extends javax.swing.JFrame {
         btnBuscarContacto = new javax.swing.JButton();
         lblEstado = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        btnBorrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,6 +74,14 @@ public class VistaCliente extends javax.swing.JFrame {
             }
         });
 
+        btnBorrar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnBorrar.setText("Borrar Contacto");
+        btnBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBorrarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -75,6 +89,7 @@ public class VistaCliente extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnBorrar)
                     .addComponent(btnBuscarContacto)
                     .addComponent(btnAddContacto)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -98,7 +113,9 @@ public class VistaCliente extends javax.swing.JFrame {
                 .addComponent(btnAddContacto)
                 .addGap(18, 18, 18)
                 .addComponent(btnBuscarContacto)
-                .addContainerGap(199, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnBorrar)
+                .addContainerGap(163, Short.MAX_VALUE))
         );
 
         pack();
@@ -125,6 +142,9 @@ ventanaAdd = new VentanaAddCont(cliente2);
                 }
             }          
         }
+        btnAddContacto.setEnabled(true);
+        btnBorrar.setEnabled(true);
+        btnBuscarContacto.setEnabled(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnBuscarContactoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarContactoActionPerformed
@@ -132,6 +152,12 @@ ventanaAdd = new VentanaAddCont(cliente2);
         ventanaBuscar.setVisible(true);
 // TODO add your handling code here:
     }//GEN-LAST:event_btnBuscarContactoActionPerformed
+
+    private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
+ventanaBorrar = new VentanaBorrar(cliente2);
+ventanaBorrar.setVisible(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBorrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -170,6 +196,7 @@ ventanaAdd = new VentanaAddCont(cliente2);
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddContacto;
+    private javax.swing.JButton btnBorrar;
     private javax.swing.JButton btnBuscarContacto;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

@@ -108,8 +108,17 @@ public class ServerObject_RMI extends UnicastRemoteObject implements Stub {
         
     }
 
-    @Override
-    public boolean EliminarContacto(String arg0) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+     @Override
+    public boolean EliminarContacto(String numero) throws RemoteException {
+     try {
+            String consulta = "call eliminar('"+numero+"');";
+            Statement st = CC.createStatement();
+            st.execute(consulta);
+        } catch (Exception e) {
+            ServerA.Write("Error [RMI] método D:"+e.getMessage());
+            return false;
+        }
+        ServerA.Write("[RMI] Cliente ejecutó método D");
+        return true;    
     }
 }

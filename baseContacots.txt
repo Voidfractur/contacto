@@ -1,0 +1,17 @@
+create database contactos;
+use contactos;
+create table cont (id_cont int primary key not null auto_increment, nombre_cont varchar(50) not null,apellido_cont varchar(50), numero varchar(10) not null, email varchar(50));
+INSERT INTO `contactos`.`cont` (`nombre_cont`, `apellido_cont`, `numero`, `email`) VALUES ('Leonardo', 'Garcia', '7151185506', 'asdasd');
+INSERT INTO `contactos`.`cont` (`nombre_cont`, `apellido_cont`, `numero`, `email`) VALUES ('David', 'Camacho', '4431234567', '');
+INSERT INTO `contactos`.`cont` (`nombre_cont`, `apellido_cont`, `numero`, `email`) VALUES ('Orlando', 'Sanchez', '7221234567', '');
+INSERT INTO `contactos`.`cont` (`nombre_cont`, `apellido_cont`, `numero`, `email`) VALUES ('Pablo', 'Salgado', '7418529630', '');
+INSERT INTO `contactos`.`cont` (`nombre_cont`, `apellido_cont`, `numero`, `email`) VALUES ('Harry', 'Wesn', '8963125471', '');
+INSERT INTO `contactos`.`cont` (`nombre_cont`, `apellido_cont`, `numero`, `email`) VALUES ('Mary', 'Bern', '5421369780', '');
+
+drop procedure if exists eliminar;
+delimiter $$
+CREATE PROCEDURE eliminar (tel varchar(10))
+ BEGIN
+set @id = (SELECT max(id_cont) FROM cont WHERE numero = tel);
+delete from cont where id_cont=@id;
+END$$

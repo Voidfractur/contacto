@@ -5,6 +5,15 @@
  */
 package Frame;
 
+import Stub.Stub;
+import java.awt.Color;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author spart
@@ -14,8 +23,10 @@ public class VentanaBorrar extends javax.swing.JFrame {
     /**
      * Creates new form VentanaBorrar
      */
-    public VentanaBorrar() {
+    private Stub cliente2;
+    public VentanaBorrar(Stub stub) {
         initComponents();
+        cliente2 = stub;
     }
 
     /**
@@ -27,29 +38,96 @@ public class VentanaBorrar extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField1 = new javax.swing.JTextField();
+        cajaNumero = new javax.swing.JTextField();
+        btnBorrar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(252, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(262, Short.MAX_VALUE))
-        );
+        cajaNumero.addKeyListener(new KeyAdapter(){
+            public void keyTyped(KeyEvent e)
+            {
+                if (cajaNumero.getText().length()== 10){
+                    e.consume();
+                }
+                char caracter = e.getKeyChar();
 
-        pack();
+                // Verificar si la tecla pulsada no es un digito
+                if(((caracter < '0') ||
+                    (caracter > '9')) &&
+                (caracter != '\b' /*corresponde a BACK_SPACE*/))
+            {
+                e.consume();  // ignorar el evento de teclado
+            }
+        }
+    });
+    cajaNumero.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+    btnBorrar.setText("Borrar");
+    btnBorrar.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btnBorrarActionPerformed(evt);
+        }
+    });
+
+    jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+    jLabel1.setText("Eliminar Contacto");
+
+    jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+    jLabel2.setText("Numero de telefono a eliminar");
+
+    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+    getContentPane().setLayout(layout);
+    layout.setHorizontalGroup(
+        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(layout.createSequentialGroup()
+            .addGap(38, 38, 38)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cajaNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(44, 44, 44)
+                    .addComponent(btnBorrar))
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))
+            .addContainerGap(22, Short.MAX_VALUE))
+    );
+    layout.setVerticalGroup(
+        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addContainerGap()
+            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel2)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addComponent(cajaNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(18, 18, 18)
+            .addComponent(btnBorrar)
+            .addGap(24, 24, 24))
+    );
+
+    pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
+
+       if (!cajaNumero.getText().isEmpty() || !cajaNumero.getText().isBlank()) {
+       
+        try {
+             boolean resultado = cliente2.EliminarContacto(cajaNumero.getText());
+             if (resultado) {
+                JOptionPane.showMessageDialog(null,"Borrado correctamente");
+                cajaNumero.setText("");
+            }else{
+                 JOptionPane.showMessageDialog(null,"Error al eliminar contacto");
+             }
+        } catch (RemoteException ex) {
+             JOptionPane.showMessageDialog(null,"Error al eliminar contacto");
+        }
+        }else{
+           JOptionPane.showMessageDialog(null, "Ingrese un numero");
+        }
+    }//GEN-LAST:event_btnBorrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -81,12 +159,15 @@ public class VentanaBorrar extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentanaBorrar().setVisible(true);
+               // new VentanaBorrar().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton btnBorrar;
+    private javax.swing.JTextField cajaNumero;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }
