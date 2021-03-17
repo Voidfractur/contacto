@@ -31,7 +31,6 @@ public class VentanaBuscar extends javax.swing.JFrame {
         initComponents();
         cliente2 = stub;
         jLModelo = new DefaultListModel();
-        modeloTabla = new DefaultTableModel();
         updateTable("");
     }
 
@@ -99,6 +98,7 @@ public class VentanaBuscar extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cajaPatronCaretUpdate
  public void updateTable(String text){
+    modeloTabla = new DefaultTableModel();
       jTable1.setModel(modeloTabla);
     modeloTabla.addColumn("Nombre");
      modeloTabla.addColumn("Apellido");

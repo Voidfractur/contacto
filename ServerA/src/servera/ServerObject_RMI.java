@@ -99,7 +99,10 @@ public class ServerObject_RMI extends UnicastRemoteObject implements Stub {
 		try {
                         Statement st = CC.createStatement();
 			ResultSet cursor =st.executeQuery(sql);
-			
+			ListaContactos.add(new ArrayList<String>());
+                        ListaContactos.add(new ArrayList<String>());
+                        ListaContactos.add(new ArrayList<String>());
+                        ListaContactos.add(new ArrayList<String>());
 			while (cursor.next()) {
 				ListaContactos.get(0).add(cursor.getString("nombre_cont"));
                                 ListaContactos.get(1).add(cursor.getString("apellido_cont"));
