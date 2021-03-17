@@ -137,6 +137,9 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cajaNombreActionPerformed"/>
       </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="cajaNombre.addKeyListener(new KeyAdapter() {&#xa;public void keyTyped(KeyEvent e)&#xa; &#xa;{if (cajaNombre.getText().length()== 49)&#xa; &#xa;     e.consume();&#xa;}&#xa;});"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JTextField" name="cajaApellido">
       <Properties>
@@ -144,6 +147,9 @@
           <Font name="Tahoma" size="14" style="0"/>
         </Property>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="cajaApellido.addKeyListener(new KeyAdapter(){&#xa;public void keyTyped(KeyEvent e)&#xa; &#xa;{if (cajaApellido.getText().length()== 49)&#xa; &#xa;     e.consume();&#xa;}&#xa;});"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JTextField" name="cajaNumero">
       <Properties>
@@ -151,6 +157,10 @@
           <Font name="Tahoma" size="14" style="0"/>
         </Property>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTextField(10)"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="cajaNumero.addKeyListener(new KeyAdapter(){&#xa; public void keyTyped(KeyEvent e)&#xa;   {&#xa;        if (cajaNumero.getText().length()== 10){&#xa;     e.consume();&#xa;        }&#xa;      char caracter = e.getKeyChar();&#xa;&#xa;      // Verificar si la tecla pulsada no es un digito&#xa;      if(((caracter &lt; &apos;0&apos;) ||&#xa;         (caracter &gt; &apos;9&apos;)) &amp;&amp;&#xa;         (caracter != &apos;\b&apos; /*corresponde a BACK_SPACE*/))&#xa;      {&#xa;         e.consume();  // ignorar el evento de teclado&#xa;      }&#xa;   }&#xa;});"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JTextField" name="cajaEmail">
       <Properties>
@@ -158,6 +168,9 @@
           <Font name="Tahoma" size="14" style="0"/>
         </Property>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="cajaEmail.addKeyListener(new KeyAdapter(){&#xa;public void keyTyped(KeyEvent e)&#xa; &#xa;{if (cajaEmail.getText().length()== 49)&#xa; &#xa;     e.consume();&#xa;}&#xa;});"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
