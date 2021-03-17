@@ -20,4 +20,8 @@ public interface Stub extends Remote{
              throws java.rmi.RemoteException;
     public String BuscarCont(String text)
              throws java.rmi.RemoteException;
+    public List<List<String>> getContactoPAtron(String text)
+             throws java.rmi.RemoteException;
+    public boolean EliminarContacto(String text)
+             throws java.rmi.RemoteException;
 }
