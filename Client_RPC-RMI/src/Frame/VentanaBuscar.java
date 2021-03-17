@@ -47,7 +47,7 @@ public class VentanaBuscar extends javax.swing.JFrame {
         jTContactos = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         cajaPatron.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cajaPatron.addCaretListener(new javax.swing.event.CaretListener() {
