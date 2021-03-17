@@ -13,6 +13,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -86,6 +88,35 @@ public class ServerObject_RMI extends UnicastRemoteObject implements Stub {
 
     @Override
     public String BuscarCont(String arg0) throws RemoteException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<List<String>> getContactoPAtron(String filtro) throws RemoteException {
+        List<List<String>> ListaContactos = new ArrayList<List<String>>();
+                 
+		String sql  ="SELECT * FROM contactos.cont where nombre_cont LIKE '%"+filtro+"%' or apellido_cont LIKE '%"+filtro+"%' or numero LIKE '%"+filtro+"%';";
+		try {
+                        Statement st = CC.createStatement();
+			ResultSet cursor =st.executeQuery(sql);
+			
+			while (cursor.next()) {
+				ListaContactos.get(0).add(cursor.getString("nombre_cont"));
+                                ListaContactos.get(1).add(cursor.getString("apellido_cont"));
+                                ListaContactos.get(2).add(cursor.getString("numero"));
+                                ListaContactos.get(3).add(cursor.getString("email"));
+				
+			}
+			return ListaContactos;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return ListaContactos;
+		}	 
+        
+    }
+
+    @Override
+    public boolean EliminarContacto(String arg0) throws RemoteException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

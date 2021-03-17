@@ -6,6 +6,7 @@
 package client_rpc.rmi;
 
 import Frame.VentanaAddCont;
+import Frame.VentanaBuscar;
 import Stub.Stub;
 import java.rmi.Naming;
 import java.rmi.registry.LocateRegistry;
@@ -20,6 +21,7 @@ import org.apache.xmlrpc.XmlRpcClient;
  */
 public class VistaCliente extends javax.swing.JFrame {  
     private VentanaAddCont ventanaAdd;
+    private VentanaBuscar ventanaBuscar;
     private Stub cliente2;
     public VistaCliente() {
         initComponents();
@@ -50,6 +52,11 @@ public class VistaCliente extends javax.swing.JFrame {
 
         btnBuscarContacto.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnBuscarContacto.setText("Buscar Contacto");
+        btnBuscarContacto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarContactoActionPerformed(evt);
+            }
+        });
 
         lblEstado.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblEstado.setForeground(new java.awt.Color(153, 102, 255));
@@ -119,6 +126,12 @@ ventanaAdd = new VentanaAddCont(cliente2);
             }          
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnBuscarContactoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarContactoActionPerformed
+        ventanaBuscar = new VentanaBuscar(cliente2);
+        ventanaBuscar.setVisible(true);
+// TODO add your handling code here:
+    }//GEN-LAST:event_btnBuscarContactoActionPerformed
 
     /**
      * @param args the command line arguments

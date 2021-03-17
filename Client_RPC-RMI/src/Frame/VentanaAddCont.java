@@ -161,7 +161,8 @@ public class VentanaAddCont extends javax.swing.JFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
-       List lista1= new ArrayList();
+        if (!hayCajasVacias()) {
+             List lista1= new ArrayList();
        lista1.add(cajaNombre.getText());
        lista1.add(cajaApellido.getText());
        lista1.add(cajaNumero.getText());
@@ -173,7 +174,11 @@ public class VentanaAddCont extends javax.swing.JFrame {
              limpiarCajas();
         } catch (RemoteException ex) {
             lblAlerta.setText("Error al registrar contacto");
-        }                     
+        }
+        }else{
+            lblAlerta.setText("El nombre o el numero no pueden estar vacios");
+        }
+                     
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void cajaNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cajaNombreActionPerformed
@@ -185,6 +190,13 @@ public class VentanaAddCont extends javax.swing.JFrame {
         cajaEmail.setText("");
         cajaNombre.setText("");
         cajaNumero.setText("");
+    }
+    private boolean hayCajasVacias(){
+        if (cajaNombre.getText().isEmpty()) return true;
+        if (cajaNumero.getText().isEmpty()) return true;
+        if (cajaNombre.getText().isBlank()) return true;
+        if (cajaNumero.getText().isBlank()) return true;
+        return false;
     }
     /**
      * @param args the command line arguments

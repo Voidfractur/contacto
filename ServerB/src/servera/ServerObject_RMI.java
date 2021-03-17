@@ -83,28 +83,33 @@ public class ServerObject_RMI extends UnicastRemoteObject implements Stub {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    public List<Contacto> getContactos(String filtro) throws RemoteException {
-        
-        try {           
+
+    @Override
+    public List<List<String>> getContactoPAtron(String filtro) throws RemoteException {
+        List<List<String>> ListaContactos = new ArrayList<List<String>>();
+                 
 		String sql  ="SELECT * FROM contactos.cont where nombre_cont LIKE '%"+filtro+"%' or apellido_cont LIKE '%"+filtro+"%' or numero LIKE '%"+filtro+"%';";
 		try {
                         Statement st = CC.createStatement();
 			ResultSet cursor =st.executeQuery(sql);
-			List<Contacto> listaProductos = new ArrayList<Contacto>();
+			
 			while (cursor.next()) {
-				Contacto contacto = new contacto(cursor.getString("Codbar_pro"));
-                                contacto.setCodbar(cursor.getString("Codbar_pro"));
-				contacto.setNombre(cursor.getString("Nombre_pro"));
-				contacto.setPrecio(Integer.parseInt(cursor.getString("Precio_pro")));
-				listaProductos.add(producto);
+				ListaContactos.get(0).add(cursor.getString("nombre_cont"));
+                                ListaContactos.get(1).add(cursor.getString("apellido_cont").equals("null")?" ":cursor.getString("apellido_cont"));
+                                ListaContactos.get(2).add(cursor.getString("numero"));
+                                ListaContactos.get(3).add(cursor.getString("email").equals("null")?" ":cursor.getString("email"));
+				
 			}
-			return listaProductos;
+			return ListaContactos;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return null;
+			return ListaContactos;
 		}	 
-        } catch (Exception e) {
-            
-        }
+        
+    }
+
+    @Override
+    public boolean EliminarContacto(String arg0) throws RemoteException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
